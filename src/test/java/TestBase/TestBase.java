@@ -5,9 +5,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class TestBase {
     private WebDriver driver;
+    private static Logger logger = LoggerFactory.getLogger("TestBase.class");
 
     public WebDriver getDriver() {
         return driver;
@@ -19,10 +22,12 @@ public class TestBase {
         WebDriverManager.chromedriver().setup();
         options.addArguments("start-maximized");
         driver = new ChromeDriver(options);
+        logger.info(">>>>> Start test >>>>>");
     }
 
     @AfterEach
     public void cleanUp(){
         driver.quit();
+        logger.info(">>>>> Driver quit. Finish test >>>>>");
     }
 }
